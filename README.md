@@ -72,9 +72,9 @@ cd api_gestos
 python manage.py runserver
 ```
 
-2. Abrimos una nueva terminal e iniciamos el script para probar la API:
+2. Abrimos una nueva terminal e iniciamos la aplicación para probar la API:
 ```bash
-python ./Source/app.py
+python ./Source/main.py
 ```
 
 3. Se abrirá el programa, que detecta cuando miramos a la cámara, mostrando un círculo verde, para analizar los gestos, recogerá los frames y enviará la petición a la API que devolverá el siguiente resultado, cada gesto activará una función determinada:

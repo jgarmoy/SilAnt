@@ -204,6 +204,9 @@ def evaluar_modelo(nombre_modelo, gesto, target_size, reshape):
         if archivo.endswith('.jpg'):
             ruta = os.path.join('Images', 'Pruebas', archivo)
             img = cv2.imread(ruta, cv2.IMREAD_GRAYSCALE)
+            if img is None:
+                print(f"Error cargando {ruta}")
+                continue
             img = cv2.resize(img, target_size) / 255.0
             img = img.reshape(reshape)
             X.append(img)
@@ -214,6 +217,11 @@ def evaluar_modelo(nombre_modelo, gesto, target_size, reshape):
 
     X = np.array(X)
     y = np.array(y)
+    print("Forma de X:", X.shape)  # <-- Añade esto para depurar
+    print("Forma de y:", y.shape)
+    if X.shape[0] == 0:
+        print("No se han cargado imágenes para evaluar.")
+        return
     modelo_up = load_model(f"./Modelos/{nombre_modelo}/modelo_{gesto.lower()}_final.h5")
     loss, accuracy = modelo_up.evaluate(X, y)
     print(f'Evaluando modelo {gesto.upper()}: Pérdida: {loss:.4f}, Precisión: {accuracy:.4f}')
@@ -221,7 +229,7 @@ def evaluar_modelo(nombre_modelo, gesto, target_size, reshape):
         
 if __name__ == "__main__":
     # Nombre que se le va a dar a los directorios. 
-    nombre_modelo = "109"
+    nombre_modelo = "1"
 
     gestos = os.listdir("./Images/train")
     ruta = os.path.join("./Modelos", nombre_modelo)

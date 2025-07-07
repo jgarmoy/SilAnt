@@ -7,7 +7,7 @@ import numpy as np
 
 # Create your views here.
 
-ruta_modelos = '../Modelos/109'
+ruta_modelos = '../Modelos/1'
 
 modelos = {}
 
